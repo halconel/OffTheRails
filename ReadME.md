@@ -1,4 +1,4 @@
 # **Off The Rails**
-<img src="/project ideas/logo.jpg" align="left" width="200" hspace="10" vspace="10">
+<img https://pp.userapi.com/c830609/v830609142/7208a/ywrd9CWXZiQ.jpg">
 Off The Rails - игра приключение с элементами выживания. В игре присутствует сюжетная составляющая, поддерживающая все события и явления в игровом процессе. Тема: фантастика (возможен мистический наклон). Жанр: 2D РПГ.
 offtherails
