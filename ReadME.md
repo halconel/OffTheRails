@@ -1,5 +1,4 @@
 [![GitHub release](https://img.shields.io/github/release/halconel/OffTheRails.svg)](https://github.com/halconel/OffTheRails/releases)
-(https://github.com/halconel/OffTheRails/releases)
 
 # **Off The Rails**
 
