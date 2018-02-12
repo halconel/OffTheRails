@@ -1,3 +1,5 @@
+[![GitHub release](https://img.shields.io/badge/release-version%200.1.1.2%20alpha-red.svg)](https://github.com/halconel/OffTheRails/releases)
+
 # **Off The Rails**
 
 
