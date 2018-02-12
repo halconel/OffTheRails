@@ -2,6 +2,8 @@ package com.example.halconel.offtherails;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -14,11 +16,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     // Основной цикл приложения
     private MainThread thread;
+    // Планетоход
+    private Vehicle vehicle;
+    private Point vehiclePoint;
 
     public GamePanel(Context context) {
         super(context);
         getHolder().addCallback(this);
+
         thread = new MainThread(getHolder(), this);
+
+        vehicle = new Vehicle(new Rect(0, 0, 400, 200));
+        vehiclePoint = new Point(210,700);
+
         setFocusable(true);
     }
 
@@ -54,9 +64,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+
+        vehicle.draw(canvas);
     }
 
     public void update() {
-
+        vehicle.update(vehiclePoint);
     }
 }

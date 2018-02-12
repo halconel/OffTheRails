@@ -17,11 +17,11 @@ public class Vehicle implements GameObject {
     private int color;
 
     @Override
-    public void update(Point point) {
-        rectangle.set(point.x - rectangle.width()/2
-                , point.y - rectangle.height()/2
-                , point.x + rectangle.width()/2
-                , point.y + rectangle.height()/2);
+    public void update(Point center) {
+        rectangle.set(center.x - rectangle.width()/2
+                , center.y - rectangle.height()/2
+                , center.x + rectangle.width()/2
+                , center.y + rectangle.height()/2);
     }
 
     @Override
@@ -33,6 +33,6 @@ public class Vehicle implements GameObject {
 
     public Vehicle(Rect rectangle) {
         this.rectangle = rectangle;
-        this.color = Color.parseColor("03241d");
+        this.color = Color.parseColor("#03241d");
     }
 }
