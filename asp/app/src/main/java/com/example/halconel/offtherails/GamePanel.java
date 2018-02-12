@@ -2,8 +2,6 @@ package com.example.halconel.offtherails;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -56,21 +54,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-
-        /* Тут пишем что выводит на экран наше приложение */
-
-            // Что бы приложение выглядело не так скучно, зальем его цветом
-            canvas.drawColor(Color.parseColor("#ffbb6e"));
-
-            Paint mPaint = new Paint();
-            mPaint.setAntiAlias(true); //включить сглаживание
-            mPaint.setColor(Color.BLACK); //цвет черный
-            mPaint.setStrokeWidth(2f); //ширина контура 2 пикселя
-            mPaint.setStyle(Paint.Style.FILL); //закрашивать примитивы черным цветом
-            mPaint.setTextSize(50f); //размер шрифта для canvas.drawText()
-
-            canvas.drawText("Это только начало", 510, 710, mPaint); //рисует повернутый текст в точке (310, 1010)
-
     }
 
     public void update() {
