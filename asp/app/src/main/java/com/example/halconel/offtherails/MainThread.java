@@ -5,6 +5,7 @@ import android.view.SurfaceHolder;
 
 /**
  * Created by halconel on 11.02.2018.
+ * Класс основного потока отрисовки и обновления состояния объектов игрового мира
  */
 
 public class MainThread extends Thread {
@@ -42,7 +43,9 @@ public class MainThread extends Thread {
             try {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
+                    /* Обновление состояний объектов игрового мира */
                     this.gamePanel.update();
+                    /* Перерисовка экрана приложения*/
                     this.gamePanel.draw(canvas);
                 }
             } catch (Exception e) {
