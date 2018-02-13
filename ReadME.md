@@ -1,4 +1,6 @@
 [![GitHub release](https://img.shields.io/github/release/halconel/OffTheRails.svg)](https://github.com/halconel/OffTheRails/releases)
+[![Code Climate](https://codeclimate.com/github/halconel/OffTheRails/badges/gpa.svg)](https://codeclimate.com/github/halconel/OffTheRails)
+
 
 # **Off The Rails**
 
