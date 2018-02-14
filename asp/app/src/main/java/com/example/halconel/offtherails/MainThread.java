@@ -7,15 +7,17 @@ import android.view.SurfaceHolder;
  * Created by halconel on 11.02.2018.
  * Класс основного потока отрисовки и обновления состояния объектов игрового мира
  */
-
 public class MainThread extends Thread {
 
     public static final int MAX_FPS = 30;
-    private double averageFPS;
+    private int frameCount = 0;
+    private long totalTime = 0;
+
     private SurfaceHolder surfaceHolder;
     private GamePanel gamePanel;
     private boolean running;
     public static Canvas canvas;
+
 
     public MainThread(SurfaceHolder surfaceHolder, GamePanel gamePanel) {
         super();
@@ -29,53 +31,43 @@ public class MainThread extends Thread {
 
     @Override
     public void run() {
-        long startTime;
-        long timeMillis;
-        long waitTime;
-        int frameCount = 0;
-        long totalTime = 0;
-        long targetTime = 1000/MAX_FPS;
 
         while (running) {
-            startTime = System.nanoTime();
+            long startTime = System.nanoTime();
             canvas = null;
 
             try {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
-                    /* Обновление состояний объектов игрового мира */
                     this.gamePanel.update();
-                    /* Перерисовка экрана приложения*/
                     this.gamePanel.draw(canvas);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
+            }
+            catch (Exception e) { e.printStackTrace(); } finally {
                 if(canvas != null) {
-                    try {
-                        surfaceHolder.unlockCanvasAndPost(canvas);
-
-                    } catch (Exception e) {e.printStackTrace();}
+                    try { surfaceHolder.unlockCanvasAndPost(canvas); }
+                    catch (Exception e) { e.printStackTrace(); }
                 }
             }
+            limitFPS(startTime);
+        }
+    }
 
-            timeMillis = (System.nanoTime() - startTime)/1000000;
-            waitTime = targetTime - timeMillis;
+    private void limitFPS(long startTime) {
+        long targetTime = 1000/MAX_FPS;
+        long timeMillis = (System.nanoTime() - startTime)/1000000;
+        long waitTime = targetTime - timeMillis;
 
-            try {
-                if(waitTime > 0) {
-                    this.sleep(waitTime);
-                }
-            } catch (Exception e) {e.printStackTrace();}
+        try {
+            if(waitTime > 0) sleep(waitTime);
+        } catch (Exception e) {e.printStackTrace();}
 
-            totalTime += System.nanoTime() - startTime;
-            frameCount++;
-            if(frameCount == MAX_FPS) {
-                averageFPS = 1000 / ((totalTime / frameCount) / 1000000);
-                frameCount = 0;
-                totalTime = 0;
-                System.out.println(averageFPS);
-            }
+        totalTime += System.nanoTime() - startTime;
+        frameCount++;
+        if(frameCount == MAX_FPS) {
+            double averageFPS = 1000 / (totalTime / frameCount / 1000000);
+            frameCount = 0; totalTime = 0;
+            System.out.println(averageFPS);
         }
     }
 }
