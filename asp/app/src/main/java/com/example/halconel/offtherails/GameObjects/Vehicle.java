@@ -1,4 +1,4 @@
-package com.example.halconel.offtherails;
+package com.example.halconel.offtherails.GameObjects;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -6,11 +6,12 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
+import com.example.halconel.offtherails.GameObjects.GameObject;
+
 /**
  * Created by d.vinogradov on 12.02.2018.
- * Класс игрового объекта вездехода
+ * Класс игрового объекта планетохода
  */
-
 public class Vehicle implements GameObject {
 
     private Rect rectangle;

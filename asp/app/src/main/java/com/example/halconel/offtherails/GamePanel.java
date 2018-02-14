@@ -2,32 +2,30 @@ package com.example.halconel.offtherails;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.example.halconel.offtherails.GameScenes.SceneManager;
+
 /**
  * Created by halconel on 11.02.2018.
+ * Расширение SurfaceView для прорисовки конвы
  */
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     // Основной цикл приложения
     private MainThread thread;
-    // Планетоход
-    private Vehicle vehicle;
-    private Point vehiclePoint;
+    // Основной менеджер игровый сцен
+    private SceneManager manager;
 
     public GamePanel(Context context) {
         super(context);
         getHolder().addCallback(this);
 
         thread = new MainThread(getHolder(), this);
-
-        vehicle = new Vehicle(new Rect(0, 0, 400, 200));
-        vehiclePoint = new Point(210,700);
+        manager = new SceneManager(0);
 
         setFocusable(true);
     }
@@ -58,17 +56,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+        manager.reciveTouch(event);
+
+        return true;
+        //return super.onTouchEvent(event);
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-
-        vehicle.draw(canvas);
+        manager.draw(canvas);
     }
 
     public void update() {
-        vehicle.update(vehiclePoint);
+        manager.update();
     }
 }
