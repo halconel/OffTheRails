@@ -2,6 +2,7 @@ package com.example.halconel.offtherails.GameObjects;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.PointF;
 
 /**
  * Created by d.vinogradov on 12.02.2018.

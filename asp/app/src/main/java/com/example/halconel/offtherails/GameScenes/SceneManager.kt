@@ -10,7 +10,10 @@ import android.view.MotionEvent
 class SceneManager(var activeScene: Int = 0) {
     private val scenes : ArrayList<Scene> = ArrayList()
 
-    init { scenes?.add(VehicleViewScene(this)) }
+    init {
+        scenes?.add(LogoScene(this))
+        scenes?.add(VehicleViewScene(this))
+    }
 
     fun reciveTouch(event: MotionEvent) {
         scenes[activeScene].receiveTouch(event)
