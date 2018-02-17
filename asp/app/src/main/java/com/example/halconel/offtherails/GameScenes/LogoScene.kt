@@ -5,6 +5,7 @@ import android.view.MotionEvent
 import com.example.halconel.offtherails.Constants
 import com.example.halconel.offtherails.GameObjects.GameObject
 import com.example.halconel.offtherails.GameObjects.Moon
+import com.example.halconel.offtherails.R
 import java.util.*
 
 
@@ -12,25 +13,21 @@ import java.util.*
  * Created by divin on 17.02.2018.
  */
 class LogoScene(manager: SceneManager): Scene(manager) {
+    // Звезды
+    val starsImg: Bitmap
     // Луна
     private val moonPoint: Point = Point(
             Constants.screenWight / 2,
             Constants.screenHeight - Constants.screenWight / 2 - 140
     )
-    private val moon: Moon = Moon(
-            Point()
-            , 100f
-            , Color.parseColor("#98CCD2"))
+    private val moon: Moon
     private val orbitCenter: Point = Point(Constants.screenWight / 2, Constants.screenHeight)
     private var orbitSpeed: Double = Math.PI / 16  // Угловая скорость движения по орбите
     private var orbitInclination: Double = Math.PI / 3 // Угол наклона плоскости орбиты
     private var orbitRadius = 0
     private var angle: Double = Math.PI // В начале луна находится над планетой
     // Планета
-    private val planet: Moon = Moon(
-            Point(Constants.screenWight / 2, Constants.screenHeight)
-            , Constants.screenWight / 2 - 50f
-            , Color.parseColor("#79718F"))
+    private val planet: Moon
     // Прямоугольник вывода текста
     private val textRect : Rect = Rect(
             250,
@@ -43,13 +40,22 @@ class LogoScene(manager: SceneManager): Scene(manager) {
     override var objects: ArrayList<GameObject>? = ArrayList()
 
     init {
-        planet.addStroke(15, Color.parseColor("#A098B6"))
+        starsImg = BitmapFactory.decodeResource(Constants.curenContext!!.resources, R.drawable.stars)
+        val moonImg = BitmapFactory.decodeResource(Constants.curenContext!!.resources, R.drawable.moon)
+        moon = Moon(moonPoint,100f,moonImg)
+        val planetImg = BitmapFactory.decodeResource(Constants.curenContext!!.resources, R.drawable.planet)
+        planet = Moon(
+                Point(Constants.screenWight / 2, Constants.screenHeight)
+                , Constants.screenWight / 2 - 50f
+                , planetImg)
+        //planet.addStroke(15, Color.parseColor("#A098B6"))
         objects?.add(moon)
         objects?.add(planet)
 
         orbitRadius = Math.abs(Math.sqrt(
                 ((moonPoint.x - orbitCenter.x)*(moonPoint.x - orbitCenter.x) +
                         (moonPoint.y - orbitCenter.y)*(moonPoint.y - orbitCenter.y)).toDouble())).toInt()
+
     }
 
     override fun update(){
@@ -70,10 +76,14 @@ class LogoScene(manager: SceneManager): Scene(manager) {
         if (angle > 2 * Math.PI) angle = 0.0
         moonPoint.x = (orbitCenter.x + Math.cos(angle) * orbitRadius * Math.cos(orbitInclination)).toInt()
         moonPoint.y = (orbitCenter.y + Math.sin(angle) * orbitRadius).toInt()
-        moon.update(moonPoint, (Math.cos(angle) * Math.sin(orbitInclination) * 50).toInt())
+        moon.update(moonPoint, (Math.cos(angle) * Math.sin(orbitInclination) * 60).toInt())
     }
 
     override fun draw(canvas: Canvas) {
+        canvas.drawBitmap(starsImg
+                , Rect(0, 0, Constants.screenWight, Constants.screenHeight)
+                , Rect(0, 0, Constants.screenWight, Constants.screenHeight)
+                , Paint())
         super.draw(canvas)
         drawTextBox(canvas)
     }
