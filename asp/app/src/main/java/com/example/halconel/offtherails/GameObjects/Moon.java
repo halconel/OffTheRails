@@ -23,9 +23,6 @@ public class Moon implements GameObject{
     private Point center;
     private float radius;
      // Отрисовка
-    private int color;
-    private int strokeColor;
-    private int strokeWidth;
     private float scale;
     // Текстура
     private Animation texture;
@@ -40,18 +37,7 @@ public class Moon implements GameObject{
     public void draw(Canvas canvas) {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        // Выведем контур луны
-//        if(strokeWidth > 0) {
-//            paint.setColor(strokeColor);
-//            paint.setStrokeWidth(strokeWidth);
-//            paint.setStyle(Paint.Style.STROKE);
-//            canvas.drawCircle(center.x, center.y, radius, paint);
-//        }
-//        // Выведем тело луны
-//        paint.setColor(color);
-//        paint.setStrokeWidth(0);
-//        paint.setStyle(Paint.Style.FILL);
-//        canvas.drawCircle(center.x, center.y, radius + scale, paint);
+
         Rect rect = new Rect(center.x - (int)(radius + scale)
                 , center.y - (int)(radius + scale)
                 , center.x + (int)(radius + scale)
@@ -62,23 +48,10 @@ public class Moon implements GameObject{
     public Moon(Point center, float radius, Bitmap img) {
         this.center = center;
         this.radius = radius;
-        this.color = color;
 
-        this.strokeColor = 0;
-        this.strokeWidth = 0;
         this.scale = 0;
 
         texture = new Animation(Arrays.asList(img), 9999999);
         texture.play();
-    }
-
-    public void addStroke(int strokeWidth, int strokeColor) {
-        this.strokeWidth = strokeWidth;
-        this.strokeColor = strokeColor;
-    }
-
-    public void removeStroke() {
-        this.strokeColor = 0;
-        this.strokeWidth = 0;
     }
 }
