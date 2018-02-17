@@ -24,7 +24,7 @@ class VehicleViewScene(manager: SceneManager): Scene(manager) {
 
     override fun update(){
         super.update()
-        vehicle.update(vehiclePoint)
+        vehicle.update(vehiclePoint, 0)
     }
 
     override fun draw(canvas: Canvas){

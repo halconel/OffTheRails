@@ -5,7 +5,7 @@ import android.view.MotionEvent
 import com.example.halconel.offtherails.Constants
 import com.example.halconel.offtherails.GameObjects.GameObject
 import com.example.halconel.offtherails.GameObjects.Moon
-import java.util.ArrayList
+import java.util.*
 
 
 /**
@@ -23,7 +23,7 @@ class LogoScene(manager: SceneManager): Scene(manager) {
             , Color.parseColor("#98CCD2"))
     private val orbitCenter: Point = Point(Constants.screenWight / 2, Constants.screenHeight)
     private var orbitSpeed: Double = Math.PI / 16  // Угловая скорость движения по орбите
-    private var orbitInclination: Float = 0.toFloat() // Угол наклона орбиты
+    private var orbitInclination: Double = Math.PI / 3 // Угол наклона плоскости орбиты
     private var orbitRadius = 0
     private var angle: Double = Math.PI // В начале луна находится над планетой
     // Планета
@@ -61,11 +61,16 @@ class LogoScene(manager: SceneManager): Scene(manager) {
         //angle = orbitSpeet * t
         //t - время (помним, что мы задали ограничение 30 кадров в секунду)
         //Расчитаем новое положение луны
+        val oldAngle = angle;
         angle += orbitSpeed / 30
+        if((Math.cos(angle) > 0 && Math.cos(oldAngle) <= 0)
+            || (Math.cos(angle) <= 0 && Math.cos(oldAngle) > 0)) { // Луна прошла апоцентр или перицентр орбиты
+            Collections.swap(objects, 0 , 1);
+        }
         if (angle > 2 * Math.PI) angle = 0.0
-        moonPoint.x = (orbitCenter.x + Math.cos(angle) * orbitRadius).toInt()
+        moonPoint.x = (orbitCenter.x + Math.cos(angle) * orbitRadius * Math.cos(orbitInclination)).toInt()
         moonPoint.y = (orbitCenter.y + Math.sin(angle) * orbitRadius).toInt()
-        moon.update(moonPoint)
+        moon.update(moonPoint, (Math.cos(angle) * Math.sin(orbitInclination) * 50).toInt())
     }
 
     override fun draw(canvas: Canvas) {
@@ -86,7 +91,7 @@ class LogoScene(manager: SceneManager): Scene(manager) {
 
     private fun drawTextBox(canvas: Canvas) {
         val paintR = Paint() // Отвечает за отрисовку Прямоугольника
-        val paintT = Paint() // Отвечает за отрисовку Теста
+        val paintT = Paint() // Отвечает за отрисовку Текта
 
         // Прямоугольник вокруг надписи
         paintR.color = textRectColor

@@ -9,6 +9,6 @@ import android.graphics.PointF;
  * Интерфейс класса игровых объектов
  */
 public interface GameObject {
-    public void update(Point center);
+    public void update(Point center, int scale);
     public void draw(Canvas canvas);
 }

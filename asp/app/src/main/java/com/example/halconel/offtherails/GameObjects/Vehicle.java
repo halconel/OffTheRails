@@ -18,7 +18,7 @@ public class Vehicle implements GameObject {
     private int color;
 
     @Override
-    public void update(Point center) {
+    public void update(Point center, int scale) {
         rectangle.set(center.x - rectangle.width()/2
                 , center.y - rectangle.height()/2
                 , center.x + rectangle.width()/2

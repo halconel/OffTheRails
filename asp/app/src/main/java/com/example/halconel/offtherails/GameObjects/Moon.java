@@ -16,9 +16,11 @@ public class Moon implements GameObject{
     private int color;
     private int strokeColor;
     private int strokeWidth;
+    private float scale;
 
     @Override
-    public void update(Point center) {
+    public void update(Point center, int scale) {
+        this.scale = scale;
         this.center.set(center.x, center.y);
     }
 
@@ -37,7 +39,7 @@ public class Moon implements GameObject{
         paint.setColor(color);
         paint.setStrokeWidth(0);
         paint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(center.x, center.y, radius, paint);
+        canvas.drawCircle(center.x, center.y, radius + scale, paint);
     }
 
     public Moon(Point center, float radius, int color) {
@@ -47,6 +49,7 @@ public class Moon implements GameObject{
 
         this.strokeColor = 0;
         this.strokeWidth = 0;
+        this.scale = 0;
     }
 
     public void addStroke(int strokeWidth, int strokeColor) {
@@ -58,5 +61,4 @@ public class Moon implements GameObject{
         this.strokeColor = 0;
         this.strokeWidth = 0;
     }
-
 }
