@@ -28,6 +28,8 @@ class Animation(private val frames: List<Bitmap>, animationTime: Float) {
     fun draw(canvas: Canvas, destination: Rect) {
         if(!isPlaying) return
 
+        val paint = Paint()
+        paint.isAntiAlias = true
         canvas.drawBitmap(frames[frameIndex], null, destination, Paint())
     }
 
