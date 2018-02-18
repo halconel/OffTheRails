@@ -6,13 +6,12 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.example.halconel.offtherails.GameScenes.SceneManager;
+import com.example.halconel.offtherails.gameScenes.SceneManager;
 
 /**
  * Created by halconel on 11.02.2018.
  * Расширение SurfaceView для прорисовки конвы
  */
-
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     // Основной цикл приложения

@@ -7,13 +7,16 @@ import android.graphics.Rect
 
 /**
  * Created by divin on 17.02.2018.
+ * Класс вывода анимации игрового объекта
  */
-class Animation(val frames: List<Bitmap>, animationTime: Float) {
-    var frameTime: Float = animationTime / frames.size
-    var frameIndex: Int = 0
-
+class Animation(private val frames: List<Bitmap>, animationTime: Float) {
+    // Скорость анимации
+    private var frameTime: Float = animationTime / frames.size
+    private var lastFrame: Long = System.currentTimeMillis()
+    // Индекс текущего кадра анимации
+    private var frameIndex: Int = 0
+    // Флаг воспроизведения анимации; истина - анимация отображается
     var isPlaying: Boolean = false
-    var lastFrame: Long = System.currentTimeMillis()
 
     fun play() {
         isPlaying = true

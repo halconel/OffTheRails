@@ -5,9 +5,11 @@ import android.graphics.Rect
 
 /**
  * Created by divin on 17.02.2018.
+ * Класс управления активной анимацией игрового объекта
  */
 class AnimationManager(val animations: List<Animation>) {
-    var animationIndex: Int = 0
+    // Индекс отображаемой анимации
+    private var animationIndex: Int = 0
 
     fun playAnim(index: Int) {
         animations.forEach {

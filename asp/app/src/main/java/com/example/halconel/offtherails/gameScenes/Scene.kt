@@ -1,10 +1,10 @@
-package com.example.halconel.offtherails.GameScenes
+package com.example.halconel.offtherails.gameScenes
 
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.view.MotionEvent
-import com.example.halconel.offtherails.GameObjects.GameObject
+import com.example.halconel.offtherails.gameObjects.GameObject
 import java.util.ArrayList
 
 /**
